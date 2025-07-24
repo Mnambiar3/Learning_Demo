@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "a5b61146-5853-414b-a291-aa4c849aff68",
+		"name": "whether",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40032498",
+		"_collection_link": "https://learning-5114.postman.co/workspace/API-Learning~bd9c027d-8bbb-4d48-ad49-4ed48cf67938/collection/40032498-a5b61146-5853-414b-a291-aa4c849aff68?action=share&source=collection_link&creator=40032498"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"cattered clouds\");\r",
+							"});\r",
+							"var jsonData = pm.response.json(); // Define jsonData here\r",
+							"pm.test(\"Tempshould be a number\", function () {\r",
+							"    pm.expect(jsonData).to.be.an(\"object\").that.has.property(\"main\");\r",
+							"    pm.expect(jsonData.main.temp).to.be.a(\"number\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"//whether\r",
+							"pm.test(\"Weather array is correct\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"weather\").that.is.an(\"array\").that.is.not.empty;\r",
+							"    pm.expect(jsonData.weather[0]).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.weather[0]).to.have.property(\"main\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=c76e6d1f2e6af75573c66176b1ad5627",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "delhi"
+						},
+						{
+							"key": "appid",
+							"value": "c76e6d1f2e6af75573c66176b1ad5627"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
